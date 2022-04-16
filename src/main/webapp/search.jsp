@@ -14,20 +14,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Airbnb</title>
 </head>
 <body>
 <img src="Images/logo.png" class="center" align="center" alt="Airbnb" height="300" width ="1000"/>
 <br><br>
-<table border ="1" align="center" style="font-size:100%;">
-<tr>
-	<th style="background-color:#d2d8c7">Image</th>
-	<th style="background-color:#d2d8c7">Name</th>
-	<th style="background-color:#d2d8c7">bedrooms</th>
-	<th style="background-color:#d2d8c7">accommodates</th>
-	<th style="background-color:#d2d8c7">address</th>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+	<th class="bg-primary">Image</th>
+	<th class="bg-primary">Name</th>
+	<th class="bg-primary">Bedrooms</th>
+	<th class="bg-primary">Accommodates</th>
+	<th class="bg-primary">Address</th>
 
 </tr>
+    </thead>
+
+
+
 <%
 	MongoClient mongoClient = new MongoClient("localhost", 27017);
 	System.out.println("MongoDB search Connected...");
@@ -54,6 +65,8 @@
 	while(cursor.hasNext()){
 		result = (Document) cursor.next();
 %>
+
+    <tbody>
 	<tr>
 		<td>
 			<img src=<%=result.get("image")%> alt="Image" height=250 width=350/>
@@ -73,6 +86,8 @@
 			<%=result.get("address") %>
 		</td>
 	</tr>
+    </tbody>
+
 <%
 	}
 %>

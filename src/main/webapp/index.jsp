@@ -13,30 +13,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Airbnb</title>
 </head>
 <body>
 <img src="Images/logo.png" class="center" alt="Airbnb" height="300" width ="1000"/>
 <br><br>
-<div  class = "center">
+<div  class="jumbotron text-center">
 <form action = "search.jsp">
 <p style = "color : black"> Search places: <br>
 <input type="text" name = "name"
 		style = "width : 360px; height : 40px; font-size:20px;">
-<input type= "submit" style= "height:50px">
+<input type= "submit" style= "height:50px" class="btn btn-primary">
 
 </p>
 </form>
 </div>
 <h1> Popular Stays!</h1>
-<div>
-<table border ="1" align="center" style="font-size:100%;">
-<tr>
-	<th style="background-color:#d2d8c7">name</th>
-	<th style="background-color:#d2d8c7">image</th>
-	<th style="background-color:#d2d8c7">review</th>
 
-</tr>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+	<th scope="col" class="bg-primary"">Name</th>
+	<th scope="col" class="bg-primary">Image</th>
+	<th scope="col" class="bg-primary">Review</th>
+      </tr>
+    </thead>
+
+
 <%
 	MongoClient mongoClient = new MongoClient("localhost", 27017);
 	System.out.println("MongoDB Connected...");
@@ -58,6 +66,9 @@
 	while(cursor.hasNext()){
 		result = (Document) cursor.next();
 %>
+
+<tbody>
+
 	<tr>
 		<td>
 		<img src=<%=result.get("image")%> alt="Image" height=250 width=350/>
@@ -71,6 +82,9 @@
 			<%=result.get("review")%>
 		</td>
 	</tr>
+
+</tbody>
+
 <%
 	}
 %>
